@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantPrice;
 use App\Models\Variant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,9 +16,29 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('products.index');
+        $mk = new Carbon($request->date);
+        // return $request;
+        $products = Product::orderby('id', 'DESC');
+//          "title": "product name",
+//   "variant": "green",
+//   "price_from": "100",
+//   "price_to": "500",
+//   "date": "2022-07-13"
+        if(isset($request->title)){
+            $products->where('title', 'LIKE','%'.$request->title.'%');
+        }
+        if(isset($request->date)){
+            $products->where('created_at', $mk);
+        }
+
+
+
+        $products = $products->paginate(2);
+        $variants = Variant::all();
+        // return $products;
+        return view('products.index', compact('products', 'variants'));
     }
 
     /**
