@@ -57,7 +57,7 @@
         </div>
 
         <div class="card-footer d-sm-flex align-items-center justify-content-between mb-4">
-            <p>1 to 10 out of 100</p>
+            <p>Showing {{ $variants->firstItem() }} to {{ $variants->lastItem() }} out of {{$variants->total()}}</p>
             {{ $variants->links() }}
         </div>
     </div>

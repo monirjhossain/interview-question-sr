@@ -16,19 +16,7 @@
                 <div class="col-md-2">
                     <select name="variant" id="" class="form-control">
                         @foreach ($variants as $item)
-                            <option value=""> -- Select Variant -- </option>
-                            @if ($item->title == 'Color')
-                                <option disabled>{{ $item->title }}</option>
-                                <option>Red</option>
-                                <option>green</option>
-                                <option>Blue</option>
-                            @endif
-                            @if ($item->title == 'Size')
-                                <option disabled>{{ $item->title }}</option>
-                                <option>XL</option>
-                                <option>XXL</option>
-                                <option>XS</option>
-                            @endif
+                            <option>{{ $item->title }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -75,12 +63,16 @@
                                 <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
     
                                     <dt class="col-sm-3 pb-0">
-                                        SM/ Red/ V-Nick
+                                        {{-- SM/ Red/ V-Nick --}}
+
+                                        @foreach($product->variants as $variant)
+                                        {{ $variant->title }} /
+                                        @endforeach
                                     </dt>
                                     <dd class="col-sm-9">
                                         <dl class="row mb-0">
-                                            <dt class="col-sm-4 pb-0">Price : {{ number_format(200,2) }}</dt>
-                                            <dd class="col-sm-8 pb-0">InStock : {{ number_format(50,2) }}</dd>
+                                            <dt class="col-sm-4 pb-0">Price : {{ $product->productVariantPrice->price }}</dt>
+                                            <dd class="col-sm-8 pb-0">InStock : {{ $product->productVariantPrice->stock }}</dd>
                                         </dl>
                                     </dd>
                                 </dl>

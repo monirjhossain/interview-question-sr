@@ -18,27 +18,22 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $mk = new Carbon($request->date);
         // return $request;
+        // $variantfilter = Variant::where([['variant', 'like', '%' . $_GET['$query'] . '%']])->get();
         $products = Product::orderby('id', 'DESC');
-//          "title": "product name",
-//   "variant": "green",
-//   "price_from": "100",
-//   "price_to": "500",
-//   "date": "2022-07-13"
-        if(isset($request->title)){
-            $products->where('title', 'LIKE','%'.$request->title.'%');
-        }
-        if(isset($request->date)){
-            $products->where('created_at', $mk);
-        }
-
-
-
         $products = $products->paginate(2);
         $variants = Variant::all();
+
+        // if($request->title){
+        //     $result = Variant::whare('title','LIKE','%' . $request->title . '%')->get();
+        // }
         // return $products;
-        return view('products.index', compact('products', 'variants'));
+        return view('products.index', compact('products','variants'));
+    }
+
+
+    public function searchItem(Request $request){
+        
     }
 
     /**
