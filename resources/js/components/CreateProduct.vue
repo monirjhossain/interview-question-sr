@@ -125,12 +125,12 @@ export default {
                 }
             ],
             product_variant_prices: [],
-            dropzoneOptions: {
-                url: 'https://httpbin.org/post',
+               url: 'https://httpbin.org/post',
                 thumbnailWidth: 150,
                 maxFilesize: 0.5,
                 headers: {"My-Awesome-Header": "header value"}
-            }
+            }dropzoneOptions: {
+             
         }
     },
     methods: {

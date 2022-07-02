@@ -13,10 +13,18 @@
                 <div class="col-md-2">
                     <input type="text" name="title" placeholder="Product Title" class="form-control">
                 </div>
+                
                 <div class="col-md-2">
                     <select name="variant" id="" class="form-control">
+                        <optgroup>
+                            <option value="">Select variant</option>
+                        </optgroup>
                         @foreach ($variants as $item)
-                            <option>{{ $item->title }}</option>
+                        <optgroup label="{{ $item->title }}">
+                            @foreach ($item->Variants as $variant)
+                                <option value="volvo">{{  $variant->variant  }}</option>
+                            @endforeach
+                            </optgroup>
                         @endforeach
                     </select>
                 </div>
@@ -65,8 +73,8 @@
                                     <dt class="col-sm-3 pb-0">
                                         {{-- SM/ Red/ V-Nick --}}
 
-                                        @foreach($product->variants as $variant)
-                                        {{ $variant->title }} /
+                                        @foreach($product->product_variants as $variant)
+                                            {{ $variant->variant }} /
                                         @endforeach
                                     </dt>
                                     <dd class="col-sm-9">

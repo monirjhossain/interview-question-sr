@@ -15,4 +15,9 @@ class Variant extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function Variants()
+    {
+        return $this->HasMany(ProductVariant::class);
+    }
+
 }
